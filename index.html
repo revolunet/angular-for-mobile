@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<!--
+  Google HTML5 slide template
+
+  Authors: Luke Mahé (code)
+           Marcin Wichary (code and design)
+           
+           Dominic Mazzoni (browser compatibility)
+           Charles Chen (ChromeVox support)
+
+  URL: http://code.google.com/p/html5slides/
+
+
+  HTML5
+  Hybrid
+  Cross-platform
+  API
+  Distribution
+-->
+
+<html>
+  <head>
+    <title>AngularJS for mobile</title>
+
+    <meta charset='utf-8'>
+    <script src='prettify.js'></script>
+    <script src='slides.js'></script>
+  </head>
+  
+<style>
+    /* Your individual styles here, or just use inline styles if that’s
+       what you want. */
+    .slides.template-default > article:not(.nobackground):not(.biglogo) {
+      background: url(images/logolong-100.png) bottom right no-repeat !important;  
+      background-color: white !important;  
+    } 
+    h2.normal {
+      position:relative;
+      top:10px;
+    }
+    ul.numbered li {
+      list-style-type: decimal;
+    }
+    .pink {
+      color:#f06;
+    }
+    .djgreen {
+      color: #163f2e;
+    }
+    .nomargin {
+      margin:0px;
+    }
+    h1 {
+      margin-top:120px;
+    }
+
+    h1.bigger {
+      font-weight:bold;
+      font-size: 80px !important;
+    }
+    .centerv {
+     margin-top:200px; 
+    }
+    div.freeticket {
+      padding-top: 40px;
+    }
+    div.features {
+      padding-top: 20px;
+    }
+    div.features div {
+      list-style: none !important;
+      background: transparent url(images/freept.jpg) no-repeat;
+      padding-left:60px;
+      vertical-align: middle;
+      line-height:60px;
+      margin-bottom:20px;
+    }
+    div.freeticket div {
+      list-style: none !important;
+      background: transparent url(images/freept.jpg) no-repeat;
+      padding-left:60px;
+      vertical-align: middle;
+      line-height:60px;
+      margin-bottom:30px;
+    }
+    .bold {
+        font-weight:bold;
+    }
+    div.list div {
+      margin-bottom:15px;
+      font-size:40px
+    }
+  </style>
+
+
+  <body style='display: none'>
+
+    <section class='slides layout-regular template-default'>
+      
+      <!-- Your slides (<article>s) go here. Delete or comment out the
+           slides below. -->
+        
+      <article style="text-align:center">
+        <h1 style='margin-top:30px;font-size:65px'>AngularJS for mobile</h1>
+        <br>
+        <img src="images/angularjs-logo.png" width=400 />
+        <br>
+        <div style='font-size:18px'>25/09/2013</div>
+      </article>
+
+      <article>
+        <h1>About revolunet</h1>
+        <br>
+        <h2 class='normal'><span class='pink'>rich web apps</span>
+        for desktop & mobile</h2>
+        <br>
+        Custom Development<br>
+        Cordova/AngularJS contributors
+        <br><br>
+        <p>
+          <img width=50 style="vertical-align:middle" src="images/twitter.png"/> @revolunet
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <img width=50  style="vertical-align:middle"  src="images/octocat.png"/> revolunet
+        </p>
+      </article>
+
+      <article>
+        <h2 class='normal'>Before, focused on <span class='pink'>Sencha Touch</span></h2>
+        <br>
+        <center><img src="images/porteavions.jpg"/></center>
+        <center>The all-in-one, top secret, monolithic solution</center>
+      </article>
+
+      <article>
+        <h2 class='normal'>Now <span class='pink'>open source all the things</span> &lt;3</h2>
+        <br><br>
+        <center>
+          <img src="images/AngularJS.png"/>
+          <br><br>
+          <img src="images/gruntjs.png"/><br>
+          <img src="images/topcoat.png"/><br>
+          <img src="images/cordova.png"/>
+        </center>
+      </article>
+
+      <article>
+        <h2 class='normal'>Now, we feel more like</h2>
+        <br><br>
+        <center><img width="600"  src="images/cigarette.jpg"/></center>
+        <br>
+        <center>A speedy, cutting-edge and focused solution</center>
+      </article>
+
+      <article  >
+        <h2 class='normal'>Why <span class='pink'>AngularJS</span> ?</h2>
+        <br><br>
+        <br><br>
+        Less code = Better Productivity and Maintenability
+        <br><br>
+        Less code = Less bugs
+        <br><br>
+        Testability (karma, DI...)
+        <br><br>
+        Flexibility : easy integration with 3rd party libs
+        <br><br>
+        Huge adoption, many tools available
+      </article>
+
+      <article>
+        <h2 class='normal'>What is cool for <span class='pink'>Mobile web dev</span></h2>
+        <br><br>
+        SPA routing perfect for mobile apps
+        <br><br>
+        Builtin view transitions (slides) : use translate3d
+        <br><br>
+        Builtin transitions for any directive : hide/show/add/move...
+        <br><br>
+        Builtin ngTouch module : swipe service, <span style="text-decoration:line-through">ngClick</span>
+        <br><br>
+        Builtin $anchorScroll directive
+        <br><br>
+        $http promises handy to deal with unstable connections
+      </article>
+
+      <article>
+        <h2 class='normal'>Transition your <span class='pink'>views</span> 1/2 (ng@1.5)</h2>
+        <br>
+        Defines some routes and the 'depth' of each page :<br>
+        <pre class="prettyprint">$routeProvider
+  .when('/', { templateUrl: 'home.html', depth: 0 })
+  .when('/contact', { templateUrl: 'contact.html', depth: 1 })
+  .when('/contact/help', { templateUrl: 'contact-help.html', depth: 50 });</pre>
+        Call a custom service on each ng-view change :<br>
+        <pre class="prettyprint">&lt;div ng-view ng-animate=&quot;NavService.getViewAnimation()&quot;&gt;&lt;/div&gt;</pre>
+        Use your service to change location:
+        <pre class="prettyprint">&lt;button ng-click=&quot;NavService.go('/contact/help')&quot;&gt;help me&lt;/button&gt;</pre>
+      </article>
+
+      <article>
+        <h2 class='normal'>Transition your <span class='pink'>views</span> 2/2 (ng@1.5)</h2>
+        <pre class="prettyprint" style="font-size:18px;line-height:22px">var service = {
+    getViewAnimation: function() {
+        return {
+            enter: 'slide-in-' + currentDirection,
+            leave: 'slide-out-' + currentDirection
+        };
+    },
+    go: function(route, direction) {
+        // guess the animation direction if not provied
+        if (!direction) {
+            direction = 'rtl';
+            var currentRouteDepth = $route.current.depth || Number.MIN_VALUE,
+                nextRouteDepth = $route.routes[route] || Number.MAX_VALUE;
+            if (currentRouteDepth && nextRouteDepth) {
+                direction = (nextRouteDepth >= currentRouteDepth)?'rtl':'ltr';
+            }
+        }
+        currentDirection = direction;
+        // finally redirect to the desired view
+        $location.path(route);
+    }
+};</pre>
+  </article>
+
+      <article>
+        <h1>Angular Community rocks</h1>
+        <h2 class='normal'>Many <span class='pink'>mobile-friendly</span> modules</h2>
+      </article>
+
+      <article>
+        <img src="images/contributors.png" width="800"/>
+      </article>
+
+      <article>
+        <h2 class='normal'><span class='pink'>Bindonce</span>, self-destruct databinding</h2>
+        <br><br>
+        Bind your date/promises once, then remove the watchers. 
+        <br>
+
+        <pre class="prettyprint">
+&lt;ul&gt;
+  &lt;li bindonce ng-repeat=&quot;person in Persons&quot;&gt;
+      &lt;a bo-href=&quot;'#/people/' + person.id&quot;&gt;&lt;img bo-src=&quot;person.imageUrl&quot;&gt;&lt;/a&gt;
+      &lt;a bo-href=&quot;'#/people/' + person.id&quot; bo-text=&quot;person.name&quot;&gt;&lt;/a&gt;
+      &lt;p bo-class=&quot;{'cycled':person.generated}&quot; bo-html=&quot;person.description&quot;&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</pre>
+        result : 1 watcher instead of 1 + (6*n)
+        <br><br>
+        <img width=50  style="vertical-align:middle;margin-right:10px;"  src="images/octocat.png"/><a href="https://github.com/Pasvaz/bindonce">https://github.com/Pasvaz/bindonce</a>
+      </article>
+
+      <article>
+        <h2 class='normal'><span class='pink'>angular-carousel</span>, let's swipe it</h2>
+        <br><br>
+        Create a carousel from a simple ng-repeat expression
+        <br>
+        <pre class="prettyprint">
+&lt;ul rn-carousel class=&quot;image&quot;&gt;
+  &lt;li ng-repeat=&quot;image in images&quot; 
+                    style=&quot;background-image:url({{ image }});&quot;&gt;
+    &lt;div class=&quot;layer&quot;&gt;image #{{ $index }}&lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</pre>
+        DOM-buffered, indicators, index binding...</li>
+        <br><br>
+        <img width=50  style="vertical-align:middle;margin-right:10px;"  src="images/octocat.png"/><a href="https://github.com/revolunet/angular-carousel">https://github.com/revolunet/angular-carousel</a>
+      </article>
+
+      <article>
+        <h2 class='normal'><span class='pink'>angular-carousel</span>, uses $swipe</h2>
+        <br><br>
+        How carousel uses the $swipe service
+        <br>
+        <pre class="prettyprint">$swipe.bind(carousel, {
+  'start': function(coords) {
+    // store coords
+  },
+  'move': function() {
+    // move carousel to follow the finger
+  },
+  'end': function() {
+    // animate to prev/next slide, rebuffer the DOM...
+  }</pre>
+  Makes user interaction fully testable via $swipe mocks
+      </article>
+
+      <article>
+        <h2 class='normal'><span class='pink'>angular-snap</span>, swiping menu</h2>
+        <br><br>
+        Directive for @jakiestfu great snap.js
+        <br>
+        <pre class="prettyprint">
+&lt;snap-drawer&gt;
+  This is the menu contents
+&lt;/snap-drawer&gt;
+
+&lt;snap-content&gt;
+  This is your page content
+  &lt;button snap-toggle=&quot;left&quot;&gt;Toggle Snap&lt;/button&gt;
+&lt;/snap-content&gt;</pre>
+        Support swipe, multiple drawers, various transitions...</li>
+        <br><br>
+        <img width=50  style="vertical-align:middle;margin-right:10px;"  src="images/octocat.png"/><a href="https://github.com/jtrussell/angular-snap.js">https://github.com/jtrussell/angular-snap.js</a>
+      </article>
+
+      <article>
+        <h2 class='normal'><span class='pink'>angular-translate</span>, translate anything</h2>
+        <br><br>
+        Complete solution, compatible with bindonce
+        <pre class="prettyprint">var translationEN = {
+  "hello-message": "Hello, World"
+  "hello-custom": "Hello {{ username }}"
+};
+$translateProvider.translations('en', translationEN);
+$translateProvider.translations('fr', translationFR);
+$translateProvider.preferredLanguage('en');</pre>
+        <pre class="prettyprint">&lt;p&gt;{{ 'hello-message' | translate }}&lt;/p&gt;
+&lt;p translate=&quot;hello-message&quot;&gt;&lt;/p&gt;
+&lt;p translate=&quot;hello-custom&quot; translate-value=&quot;{username: 'buddy'}&quot;&gt;&lt;/p&gt;</pre>
+
+      </article>
+
+      <article>
+        <h2 class='normal'><span class='pink'>angular-translate</span>, translate more</h2>
+        <br><br>
+        In your javascript code
+        <pre class="prettyprint">alert($translate('hello-message'));
+alert($translate('hello-custom', {username: 'buddy'}));</pre>
+        Support MessageFormat for pluralisation and more
+        <br><br>
+        Remote dictionnaries loading & live language switching
+        <br><br>
+        Can store translations in local folder...
+        <br><br>
+        <img width=50  style="vertical-align:middle;margin-right:10px;"  src="images/octocat.png"/><a href="https://github.com/PascalPrecht/angular-translate">https://github.com/PascalPrecht/angular-translate</a>
+      </article>
+
+      <article>
+        <h2 class='normal'><span class='pink'>rn-lazy</span>, show progress</h2>
+        <br><br>
+        Show a spinner or message when loading<br><br>
+        Dom based :
+        <pre class="prettyprint">&lt;div id=&quot;loader&quot;&gt;loading awesomeness...&lt;/div&gt;
+&lt;div rn-lazy-background=&quot;someImage&quot; rn-lazy-loader=&quot;#loader&quot;&gt;&lt;/div&gt;</pre>
+        CSS based :
+        <pre class="prettyprint">&lt;div rn-lazy-background=&quot;someImage&quot; rn-lazy-loading-class=&quot;loading&quot;
+                                rn-lazy-loaded-class=&quot;loaded&quot;&gt;&lt;/div&gt;</pre>
+        <img width=50  style="vertical-align:middle;margin-right:10px;"  src="images/octocat.png"/><a href="https://github.com/revolunet/rn-lazy">https://github.com/revolunet/rn-lazy</a>
+      </article>
+
+      <article  >
+        <h2 class='normal'><span class='pink'>Tips (1/2)</span></h2>
+        <br><br>
+        Take care of CSS (or use TopCoat.io)
+        <br><br>
+        Use HW-accel CSS for transition
+        <br><br>
+        Beware of uneeded watchers
+        <br><br>
+        Prevent page zooming with 
+        <pre class="prettyprint">&lt;meta name=viewport content=width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1&gt;</pre>
+        Don't use checkbox/radios (slows on iOS), prefer custom inputs (release soon)
+      </article>
+
+      <article  >
+        <h2 class='normal'><span class='pink'>Tips (2/2)</span></h2>
+        <br><br>
+        Use CSS flexboxes for your base layout
+        <br><br>
+        Dont use ngClick but @ftlabs FastClick
+        <br><br>
+        You can use hammer.js (see angular-gestures)
+        <br><br>
+        Debug with Safari to have a more real iOS experience
+        <br><br>
+        use ng-boilerplate and automate all the things with grunt : watch, autoprefixer, cordova build...
+      </article>
+
+      <article  >
+        <h2 class='normal'><span class='pink'>Last but not least</span></h2>
+        <br><br>
+        Your server APIs dictates your app complexity
+        <br><br>
+        -> have clean, documented APIs (see apiary.io)
+        <br><br>
+        -> use $httpBackends mocks for development
+        <br><br>
+        -> Don't let backend devs pollute your client app, keep complexity on the server :)
+      </article>
+
+    <article>
+        <h1 style='font-size:100px;margin-top:50px' class=pink align=center >Questions</h1>
+        <br><br>
+        <center>
+          <img src='images/beer.jpeg'/>
+        </center>
+    </article>
+
+      <article>
+        <br>
+        <h1 style='font-size:100px;margin-top:50px' class=pink align=center >END</h1>
+        <br><br>
+        <center><h2 class=normal >Thanks :)</h2></center>
+        <br><br><br><br>
+        <p><img width=50 style="vertical-align:middle" src="images/twitter.png"/> @revolunet</p>
+        <p><img width=50  style="vertical-align:middle"  src="images/octocat.png"/> revolunet</p>
+      </article>
+
+    </section>
+
+  </body>
+</html>
