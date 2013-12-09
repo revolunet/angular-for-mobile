@@ -1,7 +1,11 @@
 Angular For Mobile slides
 -------------------------
 
-Slides for the Paris Angular Meetup (25/09/13) and Paris Phonegag Meetup (27/09/13).
+Slides for the Paris Angular Meetup and Paris Phonegag Meetup and Nuxeo talks in 2013
+
+Demonstration of some AngularJS mobile modules
+
+Gotchas, tips'n'tricks...
 
 
 
