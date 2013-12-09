@@ -91,6 +91,10 @@
       margin-bottom:15px;
       font-size:40px
     }
+    pre {
+      margin-top:20px !important;
+      margin-bottom:20px !important;
+    }
   </style>
 
 
@@ -106,7 +110,7 @@
         <br>
         <img src="images/angularjs-logo.png" width=400 />
         <br>
-        <div style='font-size:18px'>Julien Bouquillon - @revolunet - 25/09/2013</div>
+        <div style='font-size:18px'>Julien Bouquillon - @revolunet - 09/12/2013</div>
       </article>
 
       <article>
@@ -149,12 +153,16 @@
         <br><br>
         <center><img width="600"  src="images/cigarette.jpg"/></center>
         <br>
-        <center>A speedy, cutting-edge and focused solution</center>
+        <center>A light, cutting-edge and agile solution</center>
       </article>
 
 
       <article  >
         <h2 class='normal'>Why <span class='pink'>AngularJS</span> ?</h2>
+        <br><br>
+        Cross platform mobile web development
+        <br><br>
+        Web presence + app stores with Cordova
         <br><br>
         Less code = Better Productivity and Maintenability
         <br><br>
@@ -164,74 +172,131 @@
         <br><br>
         Awesome testability (karma, DI...)
         <br><br>
-        Flexibility : easy integration with 3rd party libs
-        <br><br>
         Huge adoption, many tools available
       </article>
 
+      <article  >
+        <h2 class='normal'>Mobile web apps <span class='pink'>Challenges</span></h2>
+        <br><br>
+        Market fragmentation
+        <br><br>
+        <span style="text-decoration:line-through">Build once, run everywhere</span>
+        <br><br>
+        Platform specific paradigms
+        <br><br>
+        "Native" smooth feeling holy grail
+        <br><br>
+        Very high end-users expectations
+        <br><br>
+        Beautiful interfaces == Lot of CSS work
+        <br><br>
+        CSS is a critical part of your mobile app
+      </article>
+<!--
       <article>
         <h2 class='normal'>Sample time repartition</h2>
         <br><br>
-        <center><img width="500"  src="images/repartition.png"/></center>
+        <center><img width="500" src="images/repartition.png"/></center>
       </article>
-
+-->
 
       <article>
         <h2 class='normal'>What is cool for <span class='pink'>Mobile web dev</span></h2>
         <br><br>
-        SPA routing perfect for mobile apps
+        Builtin routing for SPA, perfect for mobile apps
         <br><br>
-        Builtin view transitions (slides) : use translate3d
+        Builtin view transitions
         <br><br>
         Builtin transitions for any directive : hide/show/add/move...
         <br><br>
-        Builtin ngTouch module : swipe service, <span style="text-decoration:line-through">ngClick</span>
+        <span style="text-decoration:line-through">Builtin ngTouch module : swipe service, ngClick</span>
         <br><br>
-        Builtin $anchorScroll directive
+        Powerful form management
         <br><br>
-        $http promises handy to deal with unstable connections
+        Promises makes async developement fun and solid again :)
       </article>
 
       <article>
-        <h2 class='normal'>Transition your <span class='pink'>views</span> 1/2 (ng@1.1.5)</h2>
+        <h2 class='normal'>AngularJS <span class='pink'>performance</span></h2>
         <br>
-        Defines some routes and the 'depth' of each page :<br>
-        <pre class="prettyprint">$routeProvider
-  .when('/', { templateUrl: 'home.html', depth: 0 })
-  .when('/contact', { templateUrl: 'contact.html', depth: 1 })
-  .when('/contact/help', { templateUrl: 'contact-help.html', depth: 50 });</pre>
-        Call a custom service on each ng-view change :<br>
-        <pre class="prettyprint">&lt;div ng-view ng-animate=&quot;NavService.getViewAnimation()&quot;&gt;&lt;/div&gt;</pre>
-        Use your service to change location:
-        <pre class="prettyprint">&lt;button ng-click=&quot;NavService.go('/contact/help')&quot;&gt;help me&lt;/button&gt;</pre>
+        Angular uses <span class='pink'>dirty checking</span> to update the views.
+        <br><br>
+        1 template binding = 1 check function executed at least twice on each $digest. same for $watch expressions.
+        <br><br>
+        $digest triggered by user events, http calls, promises...
+        
+<pre class="prettyprint">
+&lt;input type=&quot;text&quot; ng-model=&quot;firstname&quot; placeholder=&quot;firstname&quot;&gt;
+&lt;input type=&quot;text&quot; ng-model=&quot;lastname&quot; placeholder=&quot;lastname&quot;&gt;
+&lt;hr&gt;
+Hi, {{ firstname }} {{ lastname }}</pre>
+If user types "Barack" and "Obama", this leads to (11*2) $digests so 22*2 functions calls in this simple example. The whole view bindings are avaluated on each $digest.
       </article>
 
       <article>
-        <h2 class='normal'>Transition your <span class='pink'>views</span> 2/2 (ng@1.5)</h2>
-        <pre class="prettyprint" style="font-size:18px;line-height:22px">var service = {
-    getViewAnimation: function() {
-        return {
-            enter: 'slide-in-' + currentDirection,
-            leave: 'slide-out-' + currentDirection
-        };
-    },
-    go: function(route, direction) {
-        // guess the animation direction if not provied
-        if (!direction) {
-            direction = 'rtl';
-            var currentRouteDepth = $route.current.depth || Number.MIN_VALUE,
-                nextRouteDepth = $route.routes[route] || Number.MAX_VALUE;
-            if (currentRouteDepth && nextRouteDepth) {
-                direction = (nextRouteDepth >= currentRouteDepth)?'rtl':'ltr';
-            }
-        }
-        currentDirection = direction;
-        // finally redirect to the desired view
-        $location.path(route);
-    }
-};</pre>
+        <h2 class='normal'>AngularJS <span class='pink'>performance</span></h2>
+        <br>
+        <br>
+        Track your $digests :
+        <pre class="prettyprint">// $watch without expression fires on each $digest
+$scope.$watch(function() {
+  console.log("i've been executed");
+})</pre>
+  
+  Use <a href="https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk" target="_blank">batarang chrome extension</a>
+  <br><br>
+  Use two-way databinding when needed only
+  <br><br>
+  Use <a href="http://stackoverflow.com/questions/11252780/whats-the-correct-way-to-communicate-between-controllers-in-angularjs/19498009#19498009" target="_blank">$rootScope.$emit + $on</a> instead of $broadcast
+  <br><br>
+  Filter data early instead of template filters when possible
+      </article>
+      <article>
+        <h2 class='normal'>Transition your <span class='pink'>views</span> 1/2 (ng@1.2)</h2>
+        <br>
+        Transitions are now fully CSS-based. (use 3D transforms)
+        
+        <pre class="prettyprint">
+&lt;div ng-view class=&quot;view-animate&quot;&gt;&lt;/div&gt;</pre>
+        Will automatically use <span class='pink'>.view-animate.ng-enter</span> and <span class='pink'>.view-animate.ng-leave</span> CSS classes if any.
+        <br><br>
+        Dynamic transition direction ?
+        <pre class="prettyprint">
+&lt;div class=&quot;view-animate-container&quot; ng-class=&quot;animDirection&quot;&gt;
+  &lt;div ng-view class=&quot;view-animate&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
+        Listen $routeChangeStart event to update that direction
+      </article>
+
+      <article>
+        <h2 class='normal'>Transition your <span class='pink'>views</span> 2/2 (ng@1.2)</h2>
+
+        <pre class="prettyprint" style="font-size:15px;line-height:22px">// define routes (note the depth property)
+app.config(function($routeProvider) {
+  $routeProvider.when('/', {templateUrl: 'home.html', depth:1})
+                .when('/products', {templateUrl: 'products.html', depth:2})
+                .when('/products/category', {templateUrl: 'category.html', depth:3})
+});
+
+// change direction property when route changes
+app.run(function($rootScope, $window) {
+  $rootScope.direction = 'ltr';
+  $rootScope.$on('$routeChangeStart', function(event, next, current) {
+    $rootScope.direction = (current && next && (current.depth > next.depth)) ? 'ltr':'rtl';
+  });
+});</pre>
+<pre class="prettyprint" style="font-size:15px;line-height:22px">
+// defines different CSS for each direction
+.rtl .view-animate.ng-enter {transform: translate3d(100%,0,0);}
+.rtl .view-animate.ng-leave {transform: translate3d(-100%,0,0);}
+.ltr .view-animate.ng-enter {transform: translate3d(-100%,0,0);}
+.ltr .view-animate.ng-leave {transform: translate3d(100%,0,0);}
+</pre>
+<a style="font-size:22px" href="http://plnkr.co/edit/p7WZdsy0FznV3zo7VWjU?p=preview" target="_blank">See full example</a>
   </article>
 
+
+<!--
       <article>
         <h1>Angular Community rocks</h1>
         <h2 class='normal'>Many <span class='pink'>mobile-friendly</span> modules</h2>
@@ -239,6 +304,12 @@
 
       <article>
         <img src="images/contributors.png" width="800"/>
+      </article>
+-->
+
+      <article>
+        <h1>Angular Community rocks</h1>
+        <h2 class='normal'>Some <span class='pink'>mobile-friendly</span> modules</h2>
       </article>
 
       <article>
@@ -260,8 +331,9 @@
         <img width=50  style="vertical-align:middle;margin-right:10px;"  src="images/octocat.png"/><a href="https://github.com/Pasvaz/bindonce">https://github.com/Pasvaz/bindonce</a>
       </article>
 
+    
       <article>
-        <h2 class='normal'><span class='pink'>angular-carousel</span>, let's swipe it</h2>
+        <h2 class='normal'><span class='pink'>angular-carousel</span></h2>
         <br><br>
         Create a carousel from a simple ng-repeat expression
         <br>
@@ -275,8 +347,11 @@
         DOM-buffered, indicators, index binding...</li>
         <br><br>
         <img width=50  style="vertical-align:middle;margin-right:10px;"  src="images/octocat.png"/><a href="https://github.com/revolunet/angular-carousel">https://github.com/revolunet/angular-carousel</a>
+        <br><br>
+        <a href="http://tab.demo.revolunet.com" target="_blank">See full example</a> (for touch devices)
       </article>
 
+  <!--
       <article>
         <h2 class='normal'><span class='pink'>angular-carousel</span>, uses $swipe</h2>
         <br><br>
@@ -294,7 +369,7 @@
   }
 }</pre>
 Makes user interaction fully testable via $swipe mocks
-      </article>
+      </article>  -->
 
       <article>
         <h2 class='normal'><span class='pink'>angular-snap</span>, swiping menu</h2>
@@ -350,7 +425,7 @@ alert($translate('hello-custom', {username: 'buddy'}));</pre>
       <article>
         <h2 class='normal'><span class='pink'>rn-lazy</span>, show progress</h2>
         <br><br>
-        Show a spinner or message when loading<br><br>
+        Show a spinner or message while loading images<br><br>
         Dom based :
         <pre class="prettyprint">&lt;div id=&quot;loader&quot;&gt;loading awesomeness...&lt;/div&gt;
 &lt;div rn-lazy-background=&quot;someImage&quot; rn-lazy-loader=&quot;#loader&quot;&gt;&lt;/div&gt;</pre>
@@ -358,20 +433,59 @@ alert($translate('hello-custom', {username: 'buddy'}));</pre>
         <pre class="prettyprint">&lt;div rn-lazy-background=&quot;someImage&quot; rn-lazy-loading-class=&quot;loading&quot;
                                 rn-lazy-loaded-class=&quot;loaded&quot;&gt;&lt;/div&gt;</pre>
         <img width=50  style="vertical-align:middle;margin-right:10px;"  src="images/octocat.png"/><a href="https://github.com/revolunet/rn-lazy">https://github.com/revolunet/rn-lazy</a>
+        <br><br>
+        <a href="http://tab.demo.revolunet.com" target="_blank">See full example</a> (for touch devices)
+      </article>
+
+      <article>
+        <h2 class='normal'><span class='pink'>angular-gestures</span>, touchy interfaces</h2>
+        <br><br>
+        Simple wrapper around <a href="https://github.com/EightMedia/hammer.js" target="_blank">hammer.js</a>
+        <br>
+        <pre class="prettyprint">&lt;div style=&quot;transform:rotate({{rotation}}deg) scale({{scaleFactor}});&quot;
+      hm-pinch=&quot;pinch($event)&quot; hm-rotate=&quot;rotate($event)&quot;&gt;&lt;/div&gt;</pre>
+
+        <pre class="prettyprint">$scope.rotate = function(event) {
+  $scope.rotation = event.gesture.rotation % 360;
+  event.gesture.preventDefault();
+}
+$scope.pinch = function(event) {
+  $scope.scaleFactor = event.gesture.scale;
+  event.gesture.preventDefault();
+}</pre>
+<a href="http://plnkr.co/edit/5MGARaZMtGSSwWTP5z8h?p=preview" target="_blank">See full example</a>
+      </article>
+
+      <article>
+        <h2 class='normal'><span class='pink'>Adaptative</span> > Responsive</h2>
+        <br><br>
+        CSS responsive is not enough
+        <br><br>
+        Wrap <a href="https://github.com/weblinc/media-match" target="_blank">media-match</a> in a service (release soon)
+        <br><br>
+        Publish device type or group variables in your scope
+        <br><br>
+        Use ng-switch or ng-if to display blocks conditionnaly
+        <pre class="prettyprint">&lt;div ng-if=&quot;MediaMatch.DESKTOP&quot; class=&quot;detail&quot;&gt;...&lt;/div&gt;</pre>
+        <br>
+        Implementation example : <a href="http://fr.slideshare.net/cyril-balit/meetup-angular-rshop" target="_blank">REX renaultshop.fr</a> (by ekino)
       </article>
 
       <article  >
         <h2 class='normal'><span class='pink'>Tips (1/2)</span></h2>
         <br><br>
-        Take care of CSS (or use TopCoat.io)
+        Minimize DOM size, Minimize # of http calls (high latency)
         <br><br>
-        Use HW-accel CSS for transition
+        Preload templates (grunt-html2js)
+        <br><br>
+        Dont use ngClick but <a href='http://github.com/ftlabs/fastclick' target='_blank'>@ftlabs FastClick</a>
         <br><br>
         Beware of uneeded watchers
         <br><br>
+        use ng-boilerplate and automate all the things with grunt : watch, autoprefixer, cordova build...
+        <br><br>
         Prevent page zooming with 
         <pre class="prettyprint">&lt;meta name=viewport content=width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1&gt;</pre>
-        Don't use checkbox/radios (slows on iOS), prefer custom inputs (release soon)
       </article>
 
       <article  >
@@ -379,15 +493,31 @@ alert($translate('hello-custom', {username: 'buddy'}));</pre>
         <br><br>
         Use CSS flexboxes for your base layout
         <br><br>
+        Use CSS :active selector
+        <br><br>
         Use CSS3 spinners / RequestAnimationFrame
         <br><br>
-        Dont use ngClick but @ftlabs FastClick
+        Use SVG fonts (grunt-webfont)
         <br><br>
-        You can use hammer.js (see angular-gestures)
+        Use lightweight CSS components : <a href='http://topcoat.io'>Topcoat.io</a>
+        <br><br>
+        Always Use HW-accel CSS for transition
         <br><br>
         Debug with Safari to have a more real iOS experience
+      </article>
+
+       <article  >
+        <h2 class='normal'><span class='pink'>Cordova (Phonegap)</span> integration</h2>
         <br><br>
-        use ng-boilerplate and automate all the things with grunt : watch, autoprefixer, cordova build...
+        Cordova is now a clean and solid platform
+        <br><br>
+        Make the app testable in Chrome/Safari : setup a <a href="https://gist.github.com/revolunet/7553725" target="_blank">service that dispatch calls depending on the environnement</a>
+        <br><br>
+        Use <a href="https://github.com/btford/angular-phonegap-ready" target="_blank">btford.phonegap.ready</a> to queue pending calls before the deviceready event;
+        <br><br>
+        Wrap any Cordova callback in a <a href="https://gist.github.com/siongui/4969449" class='pink'>safeApply</a> call to trigger the $digest in both environnements. (conditionnal <span class='pink'>$apply()</span>)
+        <br><br>
+        Integrate cordova prepare, build in your grunt workflow
       </article>
 
       <article  >
