@@ -228,11 +228,11 @@
         $digest triggered by user events, http calls, promises...
         
 <pre class="prettyprint">
-&lt;input type=&quot;text&quot; ng-model=&quot;firstname&quot; placeholder=&quot;firstname&quot;&gt;
-&lt;input type=&quot;text&quot; ng-model=&quot;lastname&quot; placeholder=&quot;lastname&quot;&gt;
+&lt;input type=&quot;text&quot; ng-model=&quot;company&quot; placeholder=&quot;company&quot;&gt;
 &lt;hr&gt;
-Hi, {{ firstname }} {{ lastname }}</pre>
-If user types "Barack" and "Obama", this leads to (11*2) $digests so 22*2 functions calls in this simple example. The whole view bindings are avaluated on each $digest.
+Hi, {{ company }}&lt;hr&gt; 
+Uppercase : {{ company|uppercase }}&lt;hr&gt; </pre>
+If user types "Nuxeo", this leads to (5*2) $digests so 10*(NB_BINDINGS+NB_FILTERS) functions calls in this simple example : 30 calls. The whole view bindings/filters are avaluated on each $digest.
       </article>
 
       <article>
