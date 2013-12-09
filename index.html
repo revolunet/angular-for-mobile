@@ -232,7 +232,7 @@
 &lt;hr&gt;
 Hi, {{ company }}&lt;hr&gt; 
 Uppercase : {{ company|uppercase }}&lt;hr&gt; </pre>
-If user types "Nuxeo", this leads to (5*2) $digests so 10*(NB_BINDINGS+NB_FILTERS) functions calls in this simple example : 30 calls. The whole view bindings/filters are avaluated on each $digest.
+If user types "Nuxeo", this leads to (5*2) $digests so 10*(NB_BINDINGS+NB_FILTERS) functions calls in this simple example : 30 calls. The whole view bindings/filters are evaluated on each $digest.
       </article>
 
       <article>
@@ -241,17 +241,19 @@ If user types "Nuxeo", this leads to (5*2) $digests so 10*(NB_BINDINGS+NB_FILTER
         <br>
         Track your $digests :
         <pre class="prettyprint">// $watch without expression fires on each $digest
+var digests = 0;
 $scope.$watch(function() {
-  console.log("i've been executed");
-})</pre>
+  digests++;
+  console.log(digests + " calls");
+});</pre>
+  Filter data early instead of template filters when possible
   
-  Use <a href="https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk" target="_blank">batarang chrome extension</a>
   <br><br>
   Use two-way databinding when needed only
   <br><br>
   Use <a href="http://stackoverflow.com/questions/11252780/whats-the-correct-way-to-communicate-between-controllers-in-angularjs/19498009#19498009" target="_blank">$rootScope.$emit + $on</a> instead of $broadcast
   <br><br>
-  Filter data early instead of template filters when possible
+  Use <a href="https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk" target="_blank">batarang chrome extension</a>
       </article>
       <article>
         <h2 class='normal'>Transition your <span class='pink'>views</span> 1/2 (ng@1.2)</h2>
@@ -482,7 +484,7 @@ $scope.pinch = function(event) {
         <br><br>
         Dont use ngClick but <a href='http://github.com/ftlabs/fastclick' target='_blank'>@ftlabs FastClick</a>
         <br><br>
-        Beware of uneeded watchers
+        Beware of un-needed watchers / bindings
         <br><br>
         use ng-boilerplate and automate all the things with grunt : watch, autoprefixer, cordova build...
         <br><br>
@@ -497,13 +499,13 @@ $scope.pinch = function(event) {
         <br><br>
         Use CSS :active selector
         <br><br>
-        Use CSS3 spinners / RequestAnimationFrame
-        <br><br>
-        Use SVG fonts (grunt-webfont)
-        <br><br>
         Use lightweight CSS components : <a href='http://topcoat.io'>Topcoat.io</a>
         <br><br>
+        Use CSS3 spinners / RequestAnimationFrame
+        <br><br>
         Always Use HW-accel CSS for transition
+        <br><br>
+        Use SVG fonts (grunt-webfont)
         <br><br>
         Debug with Safari to have a more real iOS experience
       </article>
@@ -515,9 +517,9 @@ $scope.pinch = function(event) {
         <br><br>
         Make the app testable in Chrome/Safari : setup a <a href="https://gist.github.com/revolunet/7553725" target="_blank">service that dispatch calls depending on the environnement</a>
         <br><br>
-        Use <a href="https://github.com/btford/angular-phonegap-ready" target="_blank">btford.phonegap.ready</a> to queue pending calls before the deviceready event;
+        Use <a href="https://github.com/btford/angular-phonegap-ready" target="_blank">btford.phonegap.ready</a> to queue and fire deviceready callbacks;
         <br><br>
-        Wrap any Cordova callback in a <a href="https://gist.github.com/siongui/4969449" class='pink'>safeApply</a> call to trigger the $digest in both environnements. (conditionnal <span class='pink'>$apply()</span>)
+        Wrap any Cordova API callback in a <a href="https://gist.github.com/siongui/4969449" class='pink'>safeApply</a> call to trigger the $digest in both environnements. (conditionnal <span class='pink'>$apply()</span>)
         <br><br>
         Integrate cordova prepare, build in your grunt workflow
       </article>
@@ -546,9 +548,8 @@ $scope.pinch = function(event) {
         IRC freenode : #angularjs #angularjs-fr
         <br><br>
         Google + communities : AngularJS et AngularJS France
-
     </article>
-
+<!--
     <article>
         <h1 style='font-size:100px;margin-top:50px' class=pink align=center >Questions</h1>
         <br><br>
@@ -556,12 +557,12 @@ $scope.pinch = function(event) {
           <img src='images/beer.jpeg'/>
         </center>
     </article>
-
+-->
       <article>
         <br>
         <h1 style='font-size:100px;margin-top:50px' class=pink align=center >END</h1>
         <br><br>
-        <center><h2 class=normal >Thanks :)</h2></center>
+        <center><h2 class=normal >Questions ?</h2></center>
         <br><br><br><br>
         <p><img width=50 style="vertical-align:middle" src="images/twitter.png"/> @revolunet</p>
         <p><img width=50  style="vertical-align:middle"  src="images/octocat.png"/> revolunet</p>
